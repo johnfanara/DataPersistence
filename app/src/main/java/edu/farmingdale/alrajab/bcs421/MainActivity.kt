@@ -1,11 +1,13 @@
 package edu.farmingdale.alrajab.bcs421
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import edu.farmingdale.alrajab.bcs421.database.DatabaseActivity
 import edu.farmingdale.alrajab.bcs421.databinding.ActivityMainBinding
 import edu.farmingdale.alrajab.bcs421.files.FileActivity
+import edu.farmingdale.alrajab.bcs421.sharedpreferences.SharedPreferencesActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding.databaseBtn.setOnClickListener {  processDatabase()}
 
         binding.filesBtn.setOnClickListener { processFiles() }
+
+        binding.filesBtn.setOnClickListener { processSharedPreferences() }
 
         // TODO 01:SP Add another button for saving data using Shared Preferences
         // TODO 02:SP Make an activity that accept the User's first and last name and save/read/update
@@ -47,5 +51,9 @@ class MainActivity : AppCompatActivity() {
      */
     private fun processDatabase() {
         startActivity( Intent(this, DatabaseActivity::class.java) )
+    }
+
+    private fun processSharedPreferences() {
+        startActivity( Intent(this, SharedPreferencesActivity::class.java) )
     }
 }
