@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.room.Room
 import edu.farmingdale.alrajab.bcs421.databinding.ActivityDatabaseBinding
 import kotlin.random.Random
@@ -30,14 +31,29 @@ class DatabaseActivity : AppCompatActivity() {
     }
 
     private fun writeData() {
-        dbHelper.addUser(User("Course "+Random.nextInt(6000),
-            "CSC "+Random.nextInt(6000)))
+        val firstName = binding.editTextFName.text.toString()
+        val lastName = binding.editTextLName.text.toString()
 
+        if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
+            dbHelper.addUser(User(0, firstName, lastName)) // 0 is the auto-generated UID
+            Toast.makeText(this, "Data saved successfully.", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Please enter both first and last name.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun readData() {
-        dbHelper.getAll().forEach { Log.d("Data",it.firstName+" , "+ it.lastName) }
+        val userData = dbHelper.getAll()
+        val dataText = StringBuilder()
+
+        for (user in userData) {
+            dataText.append("First Name: ${user.firstName}, Last Name: ${user.lastName}\n")
+        }
+
+        // Update the TextView to display the data
+        binding.displayTextView.text = dataText.toString()
 
     }
+
 
 }

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.filesBtn.setOnClickListener { processFiles() }
 
-        binding.filesBtn.setOnClickListener { processSharedPreferences() }
+        binding.sharedpreferencesBtn.setOnClickListener { processSharedPreferences() }
 
         // TODO 01:SP Add another button for saving data using Shared Preferences
         // TODO 02:SP Make an activity that accept the User's first and last name and save/read/update
